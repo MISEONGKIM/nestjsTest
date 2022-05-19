@@ -1,10 +1,18 @@
-import { Injectable, UnprocessableEntityException } from '@nestjs/common';
+import {
+  Injectable,
+  Post,
+  Query,
+  UnprocessableEntityException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, Connection } from 'typeorm';
 import { ulid } from 'ulid';
 import { EmailService } from '../email/email.service';
 import { ChildService } from '../email2/email2.service';
 import { UserEntity } from './entities/user.entity';
+import * as uuid from 'uuid';
+import { VerifyEmailDto } from './dto/create-user.dto';
+
 @Injectable()
 export class UsersService {
   constructor(
@@ -24,7 +32,7 @@ export class UsersService {
       );
     }
 
-    const signupVerifyToken = 'aaaaa';
+    const signupVerifyToken = uuid.v1();
     await this.saveUser(name, email, password, signupVerifyToken);
     await this.sendMemberJoinEmail(email, signupVerifyToken);
   }
@@ -81,6 +89,7 @@ export class UsersService {
       await queryRunner.release();
     }
   }
+
   private async sendMemberJoinEmail(email: string, signupVerifyToken: string) {
     const tmp = await this.emailService.sendMemberJoinVerification(
       email,
