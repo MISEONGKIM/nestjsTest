@@ -45,6 +45,8 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+npx @nestjs/cli start
+
 ## Test
 
 ```bash
