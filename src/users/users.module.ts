@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Logger, Module } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { UsersController } from './users.controller';
 import { EmailService } from '../email/email.service';
@@ -9,6 +9,6 @@ import { UserEntity } from './entities/user.entity';
   //해당 모듈에서 사용할 저장소 등록
   imports: [TypeOrmModule.forFeature([UserEntity])],
   controllers: [UsersController],
-  providers: [UsersService, EmailService, ChildService, TestServiceA],
+  providers: [UsersService, EmailService, ChildService, TestServiceA, Logger],
 })
 export class UsersModule {}

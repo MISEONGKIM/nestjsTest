@@ -57,6 +57,7 @@ export class UsersService {
     user.signupVerifyToken = signupVerifyToken;
     await this.usersRepository.save(user);
   }
+
   private async saveUserUsingQueryRunner(
     name: string,
     email: string,

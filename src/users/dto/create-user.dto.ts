@@ -9,7 +9,7 @@ import { Transform } from 'class-transformer';
 //요청 param 검사 ?!
 export class CreateUserDto {
   @Transform((params) => {
-    console.log(params);
+    console.log('transform : ' + params);
     return params.value;
   })
   @IsString()

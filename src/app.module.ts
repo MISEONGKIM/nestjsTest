@@ -1,8 +1,17 @@
-import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import {
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+  RequestMethod,
+} from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { LoggerMiddleware } from './logger/logger.middleware';
+import {
+  LoggerMiddleware,
+  Logger2Middleware,
+} from './logger/logger.middleware';
+import { UsersController } from './users/users.controller';
 import { UsersModule } from './users/users.module';
 
 @Module({
@@ -29,6 +38,9 @@ import { UsersModule } from './users/users.module';
 export class AppModule implements NestModule {
   //미들웨어 설정
   configure(consumer: MiddlewareConsumer): any {
-    consumer.apply(LoggerMiddleware).forRoutes('/users');
+    consumer
+      .apply(LoggerMiddleware, Logger2Middleware)
+      .exclude({ path: 'users', method: RequestMethod.GET }) //미들웨어를 적용하지 않을 라우팅 경로
+      .forRoutes(UsersController);
   }
 }
