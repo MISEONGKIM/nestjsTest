@@ -7,6 +7,7 @@ import {
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { ExceptionModule } from './exception/exception.module';
 import {
   LoggerMiddleware,
   Logger2Middleware,
@@ -29,6 +30,7 @@ import { UsersModule } from './users/users.module';
       //synchronize 옵션을 true로 하면 서비스가 실행되고 데이터베이스가 연결될 때 항상 데이터베이스가 초기화 되므로 절대 프로덕션에는 true로 하면안대
       synchronize: true,
     }),
+    ExceptionModule,
   ],
   controllers: [AppController],
   providers: [AppService],
