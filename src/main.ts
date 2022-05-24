@@ -10,6 +10,7 @@ import {
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     logger: WinstonModule.createLogger({
+      //부트스트래핑까지 포함해서 로거 winston으로 대체
       transports: [
         new winston.transports.Console({
           // level: process.env.NODE_ENV === 'production' ? 'info' : 'silly',

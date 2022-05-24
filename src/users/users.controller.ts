@@ -24,7 +24,7 @@ import {
 export class UsersController {
   constructor(
     private readonly usersService: UsersService,
-    @Inject(Logger) private readonly logger: LoggerService,
+    @Inject(Logger) private readonly logger: LoggerService, //내장로거
   ) {}
 
   @Post()
